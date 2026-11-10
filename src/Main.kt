@@ -1,4 +1,4 @@
-// Ward Task Tracker - version 2
+// Ward Task Tracker - version 3
 // Tracks action items (follow-ups) from ward meetings and attaches each one to a calling.
 // Callings form a chain of command, from the bishop down to teachers and ministering brothers/sisters.
 // Every item keeps a history log so leaders can see what was decided and who must follow up.
