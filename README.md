@@ -1,75 +1,56 @@
 # Overview
 
-**Ward Task Tracker** is a Kotlin console program that models a role-based task list for a ward leadership team. Each person who uses the app has a role (Bishop, Counselor, or Organization Leader), and each role sees a different set of tasks. Users can list tasks, add tasks, mark tasks as done, and see the completion percentage for each organization.
+As a software engineer, I want to build tools that solve real, everyday coordination problems, and I wanted to deepen my skills in a modern language. This project is my practice with Kotlin: I used it to model how work is assigned and followed up in a volunteer leadership team, where plans, reminders, and decisions are often scattered across paper notes, spreadsheets, and chat messages, making it hard to look back at what was decided and who was supposed to follow up.
 
-All names, organizations, and tasks in this project are **fictional sample data**. No real member information is used.
+**Ward Task Tracker** is a Kotlin console program that tracks action items from meetings. Each item is attached to a calling (a role such as Primary President or Ministering Brother). Roles form a chain of command from the bishop down to teachers and ministering brothers and sisters, and each person can see and assign only the items for their own role and the roles below it. Every item keeps a history log (who did what, and when), items can be marked confidential, and a reminders option lists items that are overdue or due soon. All names and tasks are fictional sample data.
 
-I wrote this program to learn the basics of Kotlin and to design the data model for a larger idea: later in this course I plan to turn the same concepts into an Android app (Module 2) and connect it to a cloud database (Module 3).
+My purpose for writing this software was to learn Kotlin syntax and idioms by building something useful, and to design the data model and rules that I plan to reuse later in an Android app with a cloud database.
 
-How the program meets the Kotlin module requirements:
+The Kotlin features demonstrated in the code include:
 
-| Requirement | Where it is in `src/Main.kt` |
-|---|---|
-| Variables (mutable and immutable) | `val` for fixed values such as `organizations`; `var` for `nextId`, `user`, and `running` |
-| Expressions | Completion percentage (`finished * 100 / orgTasks.size`), `LocalDate.now().plusDays(...)` |
-| Conditionals | `if/else`, `when` in `printTask`, and input validation in the menu |
-| Loops | `for` loops that list tasks, and a `while` loop that keeps the menu running |
-| Functions | `addTask`, `completeTask`, `tasksFor`, `progressFor`, `printTask`, `readNonEmpty`, and others |
-| Classes | `TaskManager` class and the `Role` enum class |
-| Extra requirement: data classes | `Task` and `Member` are `data class` types; `copy()` is used in `completeTask` to update a task |
+- `val` and `var` for immutable and mutable variables
+- Expressions and string templates (for example, `"Task #$id"`)
+- Conditionals with `if/else` and the `when` expression
+- `for` and `while` loops
+- Functions, including functions with default parameters and expression bodies
+- Classes (`Directory`, `Tracker`) and enum classes
+- Data classes (`Calling`, `Person`, `LogEntry`, `ActionItem`) with `copy()`
+- Collections (`List`, `Map`, `Set`, `mutableListOf`), `filter`, `associateBy`, and recursion
+- Null safety with `?`, `?.`, and `?:`
 
-I also used collections (`mutableListOf`, `filter`, `count`) and the `when` keyword with an enum for the role permissions.
+[Software Demo Video](http://youtube.link.goes.here)
 
-{Link to the demo video: ADD YOUR VIDEO LINK HERE}
+# Development Environment
 
-# Instructions for Build and Use
+I developed the software in IntelliJ IDEA Community Edition, using Git for version control and GitHub to host the repository.
 
-Steps to build and/or run the software:
+The program is written in Kotlin 2.x and runs on the JVM with JDK 17 or later. It uses only the Kotlin standard library and `java.time.LocalDate`, so no external libraries are needed.
 
-1. Install a JDK (version 17 or later) and IntelliJ IDEA Community Edition.
-2. Clone this repository: `git clone <your-repository-url>`
-3. Open the folder in IntelliJ IDEA, or create a new Kotlin (JVM) project and place `src/Main.kt` in it.
-4. Run the `main` function in `Main.kt` (the green arrow next to `fun main()`).
+To run it:
 
-Command-line option (if the Kotlin compiler is installed):
+1. Clone the repository and open the folder in IntelliJ IDEA (or create a Kotlin JVM project and place `src/Main.kt` in it).
+2. Run the `main` function in `Main.kt`.
+
+Or, from a terminal with the Kotlin compiler installed:
 
 ```
 kotlinc src/Main.kt -include-runtime -d wardtasktracker.jar
 java -jar wardtasktracker.jar
 ```
 
-Instructions for using the software:
+When the program starts, choose a user (for example, the Bishop, a counselor, or a teacher) and compare what each one can see. Type 0 to exit.
 
-1. Choose who is using the app (Bishop, Counselor, or Organization Leader).
-2. Type the number of a menu option and press Enter.
-3. Option 1 lists the tasks that your role is allowed to see. Option 2 adds a task to one of your organizations. Option 3 marks a task as done. Option 4 shows the completion percentage per organization. Option 5 switches to another user so you can compare what each role sees.
-4. Type 0 to exit.
+# Useful Websites
 
-# Development Environment
-
-To recreate the development environment, you need the following software and/or libraries with the specified versions:
-
-* Kotlin 2.x (JVM)
-* JDK 17 or later (tested with OpenJDK 21)
-* IntelliJ IDEA Community Edition (free)
-* Git and a GitHub account
-
-The program uses only the Kotlin standard library and `java.time.LocalDate`. No external libraries are needed.
-
-# Useful Websites to Learn More
-
-I found these websites useful in developing this software:
-
-* [Kotlin official documentation](https://kotlinlang.org/docs/home.html)
-* [Kotlin data classes](https://kotlinlang.org/docs/data-classes.html)
-* [Kotlin conditions and loops (including `when`)](https://kotlinlang.org/docs/control-flow.html)
-* [Kotlin collections overview](https://kotlinlang.org/docs/collections-overview.html)
+- [Kotlin Documentation](https://kotlinlang.org/docs/home.html)
+- [Kotlin Data Classes](https://kotlinlang.org/docs/data-classes.html)
+- [Kotlin Conditions and Loops](https://kotlinlang.org/docs/control-flow.html)
+- [Kotlin Collections Overview](https://kotlinlang.org/docs/collections-overview.html)
 
 # Future Work
 
-The following items I plan to fix, improve, and/or add to this project in the future:
-
-* Turn the program into an Android app with a login screen and screens for each role (Module 2)
-* Store the tasks in a cloud database and add user authentication (Module 3)
-* Save tasks to a file so they remain after the program closes
-* Add due-date reminders for overdue tasks
+- Turn the program into an Android app with a login and a screen for each role
+- Store the data in a cloud database and add user authentication
+- Add recurring reminders (weekly, monthly, quarterly) for standard responsibilities
+- Add calling-process tracking (recommended, approved, sustained, set apart)
+- Extend the chain of command to the stake level
