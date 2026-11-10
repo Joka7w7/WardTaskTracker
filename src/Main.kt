@@ -3,7 +3,7 @@
 // Callings form a chain of command, from the bishop down to teachers and ministering brothers/sisters.
 // Every item keeps a history log so leaders can see what was decided and who must follow up.
 // All names and tasks are FICTIONAL sample data.
-// Author: Jose Chanax | CSE 310 - Module 1 (Kotlin)
+// Author: Jose Chanax
 
 import java.time.LocalDate
 
