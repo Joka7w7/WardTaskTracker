@@ -57,9 +57,6 @@ class Directory(callings: List<Calling>, val people: List<Person>) {
     // Map for quick lookup by id.
     private val byId: Map<String, Calling> = callings.associateBy { it.id }
 
-    /** Returns the calling with this id, or null if it does not exist. */
-    fun calling(id: String): Calling? = byId[id]
-
     /** Returns the title of a calling, or the id itself if unknown. */
     fun title(id: String): String = byId[id]?.title ?: id
 
@@ -179,8 +176,8 @@ fun printItem(item: ActionItem, directory: Directory) {
 /** Prints the full history of one item. */
 fun printHistory(item: ActionItem) {
     println("History of #${item.id} - ${item.title}")
-    for (entry in item.history) {
-        println("  ${entry.date} | ${entry.by}: ${entry.note}")
+    for ((date, by, note) in item.history) {
+        println("  $date | $by: $note")
     }
 }
 
@@ -209,7 +206,7 @@ fun printMenu(user: Person, directory: Directory) {
 fun readNonEmpty(prompt: String): String {
     while (true) {
         print(prompt)
-        val text = readLine()?.trim() ?: return ""
+        val text = readlnOrNull()?.trim() ?: return ""
         if (text.isNotEmpty()) return text
         println("This field cannot be empty.")
     }
@@ -240,7 +237,7 @@ fun chooseOwner(user: Person, directory: Directory): String? {
 
 /** Lets the user pick the meeting where the item came from. */
 fun chooseMeeting(): MeetingType {
-    val options = MeetingType.values()
+    val options = MeetingType.entries
     for ((index, m) in options.withIndex()) println("  ${index + 1}. ${m.label}")
     val choice = readNonEmpty("Meeting number: ").toIntOrNull()
     return if (choice != null && choice in 1..options.size) options[choice - 1] else MeetingType.ONE_ON_ONE
@@ -316,7 +313,7 @@ fun main() {
     var running = true
     while (running) {
         printMenu(user, directory)
-        when (readLine()?.trim()) {
+        when (readlnOrNull()?.trim()) {
             "1" -> {
                 val list = tracker.visibleTo(user)
                 if (list.isEmpty()) println("No items.") else list.forEach { printItem(it, directory) }
