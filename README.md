@@ -15,7 +15,7 @@ My purpose for creating this app was to learn Android development with Kotlin an
 
 The app includes four screens and responds to the user's input. The original console version of the program is in the `kotlin-console` folder, and the Android app is in the `android-app` folder.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/SL-7Vzxia8Q)
 
 # Development Environment
 
